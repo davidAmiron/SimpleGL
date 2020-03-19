@@ -1,6 +1,8 @@
 # SimpleGL
 A simple graphics library based on OpenGL
 
+Currently being developed on Mac, but might work on other systems
+
 ## Installation
 Clone the repository
 ```bash
