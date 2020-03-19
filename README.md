@@ -4,7 +4,7 @@ A simple graphics library based on OpenGL
 ## Installation
 Clone the repository
 ```bash
-git clone reponame
+git clone git@github.com:davidAmiron/SimpleGL.git
 ```
 
 Make the build space (inside the cloned repository)
@@ -17,3 +17,11 @@ Build
 cmake ..
 make install
 ```
+
+## Usage
+In your CMakeLists.txt put the following lines:
+```cmake
+find_package(SimpleGL REQUIRED)
+target_link_libraries([your\_target] simplegl)
+```
+replace [your\_target] with the name of your target
