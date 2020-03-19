@@ -9,9 +9,11 @@ Clone the repository
 git clone git@github.com:davidAmiron/SimpleGL.git
 ```
 
-Make the build space (inside the cloned repository)
+Make the build space
 ```bash
+cd simplegl
 mkdir build
+cd build
 ```
 
 Build
