@@ -22,6 +22,6 @@ make install
 In your CMakeLists.txt put the following lines:
 ```cmake
 find_package(SimpleGL REQUIRED)
-target_link_libraries([your\_target] simplegl)
+target_link_libraries([your_target] simplegl)
 ```
 replace [your\_target] with the name of your target
