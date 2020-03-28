@@ -1,6 +1,9 @@
+
+#include "SDL2/SDL.h"
+#include "GL/glew.h"
+
 #include <string>
 #include <vector>
-#include "SDL2/SDL.h"
 
 class SimpleGL {
 
@@ -9,12 +12,17 @@ public:
     /**
      * Represent a color. Values are between 0 and 1.
      */
-    typedef struct Color {
+    struct Color {
         float red;
         float green;
         float blue;
         float alpha;
-    } Color_t;
+
+        Color (float r, float g, float b, float a) :
+            red(r), green(g), blue(b), alpha(a)
+        {
+        }
+    };
 
     /**
      * Create a SimpleGL object
@@ -25,7 +33,7 @@ public:
      * @param height The window height in pixels
      * @param width The window width in pixels
      */
-    SimpleGL(std::string title, int loc_x, int loc_y, int width, int height);
+    SimpleGL(std::string title, int loc_x, int loc_y, int width, int height, SimpleGL::Color background_color);
 
     /**
      * Initialize the window
@@ -76,6 +84,7 @@ private:
 
     std::string window_title_;
     int window_loc_x_, window_loc_y_, window_width_, window_height_;
+    SimpleGL::Color background_color_;
 
     SDL_Window *window_;
     SDL_GLContext gl_context_;
