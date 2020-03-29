@@ -31,4 +31,4 @@ In your CMakeLists.txt put the following lines:
 find_package(SimpleGL REQUIRED)
 target_link_libraries([your_target] simplegl)
 ```
-replace [your\_target] with the name of your target
+replace [your\_target] with the name of your target.
