@@ -1,3 +1,4 @@
+#define GLEW_STATIC
 
 #include "SDL2/SDL.h"
 #include "GL/glew.h"
@@ -20,6 +21,18 @@ public:
 
         Color (float r, float g, float b, float a) :
             red(r), green(g), blue(b), alpha(a)
+        {
+        }
+    };
+
+    /**
+     * Represent a point on the window, in pixels
+     */
+    struct Point {
+        int x;
+        int y;
+
+        Point (int x, int y) : x(x), y(y)
         {
         }
     };
@@ -54,7 +67,7 @@ public:
      * @param x3, y3 The location of the third point
      * @param color The color of the triangle
      */
-    void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, SimpleGL::Color color);
+    void DrawTriangle(SimpleGL::Point p1, SimpleGL::Point p2, SimpleGL::Point p3, SimpleGL::Color color);
 
     /**
      * Draw a rectangle
@@ -81,6 +94,10 @@ public:
 private:
 
     void Draw();
+    void AppendColor(std::vector<float>& vec, SimpleGL::Color color);
+    void NormalizePointToGLCoords(SimpleGL::Point point, float& x_gl, float& y_gl);
+    void print_vector(std::vector<float> vec); // For testing, remove this
+    void do_stuff();
 
     std::string window_title_;
     int window_loc_x_, window_loc_y_, window_width_, window_height_;
@@ -101,31 +118,33 @@ private:
     GLuint triangles_ebo_;
     GLuint lines_ebo_;
 
+    int test_int = 0;
+
     const char* kVertexShaderSource = R"glsl(
         #version 150 core
 
-        in vec2 position;
-        in vec3 color;
+        in vec2 vertex_position_in;
+        in vec4 vertex_color_in;
 
-        out vec3 color_out;
+        out vec4 vertex_color_out;
     
         void main()
         {
-            gl_Position = vec4(position, 0.0, 1.0);
-            color_out = color;
+            gl_Position = vec4(vertex_position_in, 0.0, 1.0);
+            vertex_color_out = vertex_color_in;
         }
     )glsl";
 
     const char* kFragmentShaderSource = R"glsl(
         #version 150 core
 
-        in vec3 color;
+        in vec4 vertex_color_out;
         
-        out vec4 color_out;
+        out vec4 fragment_color_out;
 
         void main()
         {
-            color_out = color;
+            fragment_color_out = vertex_color_out;
         }
     )glsl";
 

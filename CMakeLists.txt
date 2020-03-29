@@ -4,6 +4,7 @@ project(simplegl)
 
 set(CMAKE_BUILD_TYPE "Release") 
 set(CMAKE_CXX_STANDARD 17)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 include(GNUInstallDirs)
 
@@ -36,6 +37,12 @@ target_link_libraries(simplegl PRIVATE GLEW::GLEW)
 find_package(SDL2 REQUIRED)
 target_include_directories(simplegl PRIVATE ${SDL2_INCLUDE_DIRS})
 target_link_libraries(simplegl PRIVATE ${SDL2_LIBRARIES})
+
+# TEST
+add_executable(test src/test_opengl.cc)
+target_link_libraries(test PRIVATE GLEW::GLEW)
+target_include_directories(test PRIVATE ${SDL2_INCLUDE_DIRS})
+target_link_libraries(test PRIVATE ${SDL2_LIBRARIES})
 
 # Configure installation
 install(TARGETS simplegl EXPORT SimpleGLConfig
