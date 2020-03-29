@@ -1,8 +1,6 @@
 # SimpleGL
 A simple graphics library based on OpenGL.
 
-Currently being developed on Mac, might be made more general for other systems later.
-
 ## Dependencies
 This project depends on GLEW and SDL2. Install the appropriate versions on your computer.
 
