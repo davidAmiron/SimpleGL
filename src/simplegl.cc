@@ -62,24 +62,6 @@ void SimpleGL::Init()
     glLinkProgram(program);
     glUseProgram(program);
 
-    GLint Result;
-    int InfoLogLength;
-
-    glGetProgramiv(program, GL_LINK_STATUS, &Result);
-    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &InfoLogLength);
-    std::cout << InfoLogLength << std::endl;
-    if ( InfoLogLength > 0 ){
-        std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-        glGetProgramInfoLog(program, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-        printf("%s\n", &ProgramErrorMessage[0]);
-    }
-
-    GLint status;
-    glGetShaderiv(vertex_shader_, GL_COMPILE_STATUS, &status);
-    char buffer[512];
-    glGetShaderInfoLog(fragment_shader_, 512, NULL, buffer);
-    std::cout << buffer << std::endl;
-
     // Initialize virtual buffer objects
     glGenBuffers(1, &triangles_vbo_);
     glGenBuffers(1, &lines_vbo_);
@@ -91,7 +73,6 @@ void SimpleGL::Init()
 
     // Bind the buffer that the below attributes pertain to
     glBindBuffer(GL_ARRAY_BUFFER, triangles_vbo_);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangles_ebo_);
 
     GLint pos_attrib = glGetAttribLocation(program, "vertex_position_in");
     glVertexAttribPointer(pos_attrib, 2, GL_FLOAT, GL_FALSE, 6*sizeof(float), 0);
@@ -128,22 +109,7 @@ void SimpleGL::Draw()
     glBindBuffer(GL_ARRAY_BUFFER, triangles_vbo_);
 
     
-    float vertices[] = {
-        -0.5f,  0.5f, 1.0f, 0.0f, 0.0f, 1.0f,    // Vertex 1 (X, Y, r, g, b, a)
-        0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f,    // Vertex 2 (X, Y, r, g, b, a)
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f,    // Vertex 3 (X, Y, r, g, b, a)
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f     // Vertex 4 (X, Y, r, g, b, a)
-    };
-
-    float *d = triangle_vertices_.data();
-    std::cout << sizeof(d) / sizeof(d[0]) << std::endl;
-    std::cout << typeid(vertices).name() << std::endl;
-    std::cout << sizeof(triangle_vertices_.data()) << std::endl;
-    std::cout << triangle_vertices_.size() << std::endl;
-
-
     glBufferData(GL_ARRAY_BUFFER, triangle_vertices_.size()*sizeof(float), triangle_vertices_.data(), GL_STATIC_DRAW);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     //glBindBuffer(GL_ARRAY_BUFFER, lines_vbo_);
     //glBufferData(GL_ARRAY_BUFFER, sizeof(line_vertices_.data()), line_vertices_.data(), GL_STATIC_DRAW);
@@ -163,10 +129,10 @@ void SimpleGL::Draw()
     //glDrawElements(GL_LINES, line_elements_.size() / 2, GL_UNSIGNED_INT, 0);
 
     // Clear vertex and element arrays
-    //triangle_vertices_.clear();
-    //line_vertices_.clear();
-    //triangle_elements_.clear();
-    //line_elements_.clear();
+    triangle_vertices_.clear();
+    line_vertices_.clear();
+    triangle_elements_.clear();
+    line_elements_.clear();
 }
 
 void SimpleGL::do_stuff()
@@ -220,7 +186,7 @@ void SimpleGL::AppendColor(std::vector<float>& vec, SimpleGL::Color color)
 void SimpleGL::NormalizePointToGLCoords(SimpleGL::Point point, float& x_gl, float& y_gl)
 {
     x_gl = (point.x / (float)window_width_) * 2 - 1;
-    y_gl = (point.y / (float)window_height_) * 2 - 1;
+    y_gl = -(point.y / (float)window_height_) * 2 + 1;
 }
 
 void SimpleGL::print_vector(std::vector<float> vec)
@@ -232,6 +198,15 @@ void SimpleGL::print_vector(std::vector<float> vec)
 
 void SimpleGL::DrawRect(int x, int y, int width, int height, SimpleGL::Color color)
 {
+    SimpleGL::DrawTriangle(SimpleGL::Point(x, y),
+                           SimpleGL::Point(x + width, y),
+                           SimpleGL::Point(x + width, y + height),
+                           color);
+
+    SimpleGL::DrawTriangle(SimpleGL::Point(x + width, y + height),
+                           SimpleGL::Point(x, y + height),
+                           SimpleGL::Point(x, y),
+                           color);
 
 }
 
