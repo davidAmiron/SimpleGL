@@ -79,6 +79,15 @@ public:
     void DrawRect(int x, int y, int width, int height, SimpleGL::Color color);
 
     /**
+     * Draw a diamond shaped point
+     *
+     * @param point The location of the point
+     * @param radius The radius of the point
+     * @param color The color of the point
+     */
+    void DrawPoint(SimpleGL::Point point, int radius, SimpleGL::Color color);
+
+    /**
      * Draw a line
      *
      * @param x1, y1 Location of first point of line

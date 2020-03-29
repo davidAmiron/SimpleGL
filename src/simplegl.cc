@@ -210,6 +210,31 @@ void SimpleGL::DrawRect(int x, int y, int width, int height, SimpleGL::Color col
 
 }
 
+void SimpleGL::DrawPoint(SimpleGL::Point point, int radius, SimpleGL::Color color)
+{
+    int x = point.x;
+    int y = point.y;
+    SimpleGL::DrawTriangle(point,
+                           SimpleGL::Point(x + radius, y),
+                           SimpleGL::Point(x, y + radius),
+                           color);
+
+    SimpleGL::DrawTriangle(point,
+                           SimpleGL::Point(x - radius, y),
+                           SimpleGL::Point(x, y + radius),
+                           color);
+
+    SimpleGL::DrawTriangle(point,
+                           SimpleGL::Point(x - radius, y),
+                           SimpleGL::Point(x, y - radius),
+                           color);
+
+    SimpleGL::DrawTriangle(point,
+                           SimpleGL::Point(x + radius, y),
+                           SimpleGL::Point(x, y - radius),
+                           color);
+}
+
 void SimpleGL::DrawLine(int x1, int y1, int x2, int y2, SimpleGL::Color color)
 {
 }
