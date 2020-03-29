@@ -93,7 +93,7 @@ public:
      * @param x1, y1 Location of first point of line
      * @param x2, y2 Location of second point of line
      */
-    void DrawLine(int x1, int y1, int x2, int y2, SimpleGL::Color color);
+    void DrawLine(SimpleGL::Point p1, SimpleGL::Point p2, SimpleGL::Color color);
 
     /**
      * Destroy the object, and clean up
@@ -105,8 +105,6 @@ private:
     void Draw();
     void AppendColor(std::vector<float>& vec, SimpleGL::Color color);
     void NormalizePointToGLCoords(SimpleGL::Point point, float& x_gl, float& y_gl);
-    void print_vector(std::vector<float> vec); // For testing, remove this
-    void do_stuff();
 
     std::string window_title_;
     int window_loc_x_, window_loc_y_, window_width_, window_height_;
@@ -126,6 +124,9 @@ private:
     std::vector<int> line_elements_;
     GLuint triangles_ebo_;
     GLuint lines_ebo_;
+
+    GLuint triangles_vao_;
+    GLuint lines_vao_;
 
     int test_int = 0;
 
