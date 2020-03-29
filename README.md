@@ -4,7 +4,9 @@ A simple graphics library based on OpenGL.
 Currently being developed on Mac, might be made more general for other systems later.
 
 ## Dependencies
-This project depends on GLEW and SDL2. The relevant librares are currently included in this repository, however are only for mac.
+This project depends on GLEW and SDL2. Install the appropriate versions on your computer.
+
+TODO: Add more installation instructions for GLEW and SDL2
 
 ## Installation
 Clone the repository
