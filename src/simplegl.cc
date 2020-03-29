@@ -91,6 +91,7 @@ void SimpleGL::Init()
 
     // Bind the buffer that the below attributes pertain to
     glBindBuffer(GL_ARRAY_BUFFER, triangles_vbo_);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangles_ebo_);
 
     GLint pos_attrib = glGetAttribLocation(program, "vertex_position_in");
     glVertexAttribPointer(pos_attrib, 2, GL_FLOAT, GL_FALSE, 6*sizeof(float), 0);
@@ -117,8 +118,6 @@ bool SimpleGL::Update()
 
     SimpleGL::Draw();
     SDL_GL_SwapWindow(window_);
-    SDL_Event windowEvent;
-    SDL_PollEvent(&windowEvent);
 
     return true;
 }
@@ -151,7 +150,7 @@ void SimpleGL::Draw()
 
     // Update element buffer objects
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangles_ebo_);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(triangle_elements_.data()), triangle_elements_.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_elements_.size()*sizeof(int), triangle_elements_.data(), GL_STATIC_DRAW);
     
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lines_ebo_);
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(line_elements_.data()), line_elements_.data(), GL_STATIC_DRAW);

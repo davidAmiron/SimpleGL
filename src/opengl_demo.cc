@@ -99,12 +99,6 @@ int main()
     glEnableVertexAttribArray(colAttrib);
     glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 
-    // Draw lines
-    glBegin(GL_LINES);
-        glVertex2f(0.1, 0.1);
-        glVertex2f(-0.1, -0.1);
-    glEnd();
-
     bool running = true;
     while (running)
     {

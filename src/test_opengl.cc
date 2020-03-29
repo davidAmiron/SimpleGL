@@ -123,6 +123,9 @@ int main()
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 
+    GLuint ebo;
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
 
 
@@ -173,20 +176,17 @@ int main()
 
 
     // Create elements
-    //GLuint elements[] = {
-    //    0, 1, 2,
-    //    2, 3, 0
-    //};
+    GLuint elements[] = {
+        0, 1, 3,
+        2, 3, 0
+    };
 
     //GLuint elements[] = {
     //    0, 1, 1, 2, 2, 3, 3, 0
     //};
 
     // Element Buffer Object
-    //GLuint ebo;
-    //glGenBuffers(1, &ebo);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 
 
     
@@ -206,8 +206,8 @@ int main()
 
 
     // Drawing
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+    //glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
     
 
     SDL_GL_SwapWindow(window);

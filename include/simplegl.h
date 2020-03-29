@@ -113,8 +113,8 @@ private:
     std::vector<float> line_vertices_;
     GLuint triangles_vbo_;
     GLuint lines_vbo_;
-    std::vector<float> triangle_elements_;
-    std::vector<float> line_elements_;
+    std::vector<int> triangle_elements_;
+    std::vector<int> line_elements_;
     GLuint triangles_ebo_;
     GLuint lines_ebo_;
 
