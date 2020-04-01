@@ -89,10 +89,7 @@ void SimpleGL::Init()
     glBindBuffer(GL_ARRAY_BUFFER, lines_vbo_);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lines_ebo_);
 
-    //GLint pos_attrib_2 = glGetAttribLocation(program, "vertex_position_in");
     glVertexAttribPointer(pos_attrib, 2, GL_FLOAT, GL_FALSE, 6*sizeof(float), 0);
-
-    //GLint color_attrib_2 = glGetAttribLocation(program, "vertex_color_in");
     glVertexAttribPointer(color_attrib, 4, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(2*sizeof(float)));
 
     glEnableVertexAttribArray(pos_attrib);
