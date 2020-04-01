@@ -55,10 +55,8 @@ public:
 
     /**
      * Update the window
-     *
-     * @returns true if still running, false if window has been quit
      */
-    bool Update();
+    void Update();
 
     /**
      * Draw a triangle
@@ -94,6 +92,13 @@ public:
      * @param x2, y2 Location of second point of line
      */
     void DrawLine(SimpleGL::Point p1, SimpleGL::Point p2, SimpleGL::Color color);
+
+    /**
+     * Check if the close button has been clicked
+     *
+     * @returns True if close button has been clicked, False otherwise
+     */
+    bool HasQuit();
 
     /**
      * Destroy the object, and clean up

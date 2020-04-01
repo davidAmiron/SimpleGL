@@ -97,28 +97,12 @@ void SimpleGL::Init()
 
     glEnableVertexAttribArray(pos_attrib);
     glEnableVertexAttribArray(color_attrib);
-
-    //glEnableVertexAttribArray(pos_attrib_2);
-    //glEnableVertexAttribArray(color_attrib_2);
-    // TODO: Make a function for this
-
 }
 
-bool SimpleGL::Update()
+void SimpleGL::Update()
 {
-    SDL_Event window_event;
-    if (SDL_PollEvent(&window_event))
-    {
-        if (window_event.type == SDL_QUIT) {
-            SimpleGL::Destroy();
-            return false;
-        }
-    }
-
     SimpleGL::Draw();
     SDL_GL_SwapWindow(window_);
-
-    return true;
 }
 
 void SimpleGL::Draw()
@@ -132,9 +116,7 @@ void SimpleGL::Draw()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, triangles_ebo_);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle_elements_.size()*sizeof(int), triangle_elements_.data(), GL_STATIC_DRAW);
 
-    std::cout << "HERE" << std::endl;
     glDrawElements(GL_TRIANGLES, triangle_elements_.size(), GL_UNSIGNED_INT, 0);
-    std::cout << "NOT HERE" << std::endl;
 
     // Draw lines
     glBindVertexArray(lines_vao_);
@@ -237,6 +219,12 @@ void SimpleGL::DrawLine(SimpleGL::Point p1, SimpleGL::Point p2, SimpleGL::Color 
 
     line_elements_.push_back(line_elements_.size());
     line_elements_.push_back(line_elements_.size());
+}
+
+bool SimpleGL::HasQuit()
+{
+    SDL_Event window_event;
+    return SDL_PollEvent(&window_event) && window_event.type == SDL_QUIT;
 }
 
 void SimpleGL::Destroy()
