@@ -36,9 +36,9 @@ void SimpleGL::Init()
 
     // Set Background Color
     glClearColor(background_color_.red, background_color_.green, background_color_.blue, background_color_.alpha);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     SDL_GL_SwapWindow(window_);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // Initialize shaders
     vertex_shader_ = glCreateShader(GL_VERTEX_SHADER);
@@ -107,6 +107,10 @@ void SimpleGL::Update()
 
 void SimpleGL::Draw()
 {
+    // Clear screen
+    glClearColor(background_color_.red, background_color_.green, background_color_.blue, background_color_.alpha);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     // Draw triangles
     glBindVertexArray(triangles_vao_);
 
