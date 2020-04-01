@@ -97,6 +97,10 @@ void SimpleGL::Init()
 
     glEnableVertexAttribArray(pos_attrib);
     glEnableVertexAttribArray(color_attrib);
+
+    // Trigger SDL event loop
+    SDL_Event window_event;
+    SDL_PollEvent(&window_event);
 }
 
 void SimpleGL::Update()
