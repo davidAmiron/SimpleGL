@@ -32,3 +32,8 @@ find_package(SimpleGL REQUIRED)
 target_link_libraries([your_target] simplegl)
 ```
 replace [your\_target] with the name of your target.
+
+Now in your code, use the following:
+```cpp
+#include "simplegl.h"
+```
