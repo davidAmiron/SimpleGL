@@ -1,3 +1,6 @@
+#ifndef SIMPLEGL_H
+#define SIMPLEGL_H
+
 #define GLEW_STATIC
 
 #include "SDL2/SDL.h"
@@ -164,3 +167,5 @@ private:
     )glsl";
 
 };
+
+#endif
